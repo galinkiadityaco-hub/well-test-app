@@ -1,0 +1,77 @@
+﻿
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Test table</title>
+</head>
+<body>
+    <style>
+        body{
+            background-color: #222; 
+            color: #ebebeb;
+            font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+        }
+        table{
+            width:90%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top:50px;
+            border-radius: 15px; 
+            overflow: hidden;
+            border-collapse: separate;
+            border-spacing: 0;
+            background-color: #303030;
+            border: 1px solid #444;
+        }
+        th,td{
+            border: 1px solid #444;
+            padding: 12px;
+            text-align:center;
+
+        }
+        td:firstchild{
+            margin-top:50px;
+        }
+        th{
+            background-color: #444; 
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            border-bottom: 2px solid #f7f7f7;
+        }
+        tr:hover {
+            background-color:  #3e3e3e; 
+        }
+
+    </style>
+    <table id="myTable">
+        <thead>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Result</th>
+            <th>Remarks</th>
+        </thead>
+        <tbody id="tablebody">
+
+        </tbody> 
+    </table>
+    <script>
+
+        let source = new EventSource("/stream");
+
+        source.onmessage = function (event) {
+            let data = JSON.parse(event.data);
+            let table = document.getElementById("tablebody");
+            let row = table.insertRow();
+            row.insertCell(0).innerText = data.id;
+            row.insertCell(1).innerText = data.Description;
+            row.insertCell(2).innerText = data.Result;
+            row.insertCell(3).innerText ="NxsA";
+        }
+
+    </script>
+</body>
+</html>
